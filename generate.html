@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Generate Access Key • Yamzz Mail</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#070b13;color:#eef5ff;font-family:Inter,system-ui,Arial;display:flex;align-items:center;justify-content:center;padding:24px}
+.box{width:min(620px,100%);background:#0c1322;border:1px solid #1e2e4d;border-radius:28px;padding:30px 24px;box-shadow:0 25px 80px #0008}
+.icon{width:72px;height:72px;border-radius:20px;margin:auto;background:#102846;border:1px solid #275187;display:grid;place-items:center;font-size:34px;color:#4cc9ff}
+h1{text-align:center;font-size:28px;margin:22px 0 8px}.sub{text-align:center;color:#71819b;margin:0 0 25px}
+.line{height:1px;background:#1b2940;margin:20px 0}.success{text-align:center;display:inline-block;margin:0 auto 20px;background:#0c3028;border:1px solid #155b49;color:#4ee0ad;padding:9px 14px;border-radius:20px;font-weight:800}.center{text-align:center}
+.label{color:#6c7890;font-weight:800;letter-spacing:2px;font-size:12px;margin:18px 0 10px}
+.key{display:flex;align-items:center;gap:10px;border:1px solid #1670a0;background:#081827;border-radius:17px;padding:16px 18px;color:#55c7ff;font-size:21px;font-weight:900;letter-spacing:2px;word-break:break-all}.copy{flex:0 0 auto;border:0;border-radius:11px;background:#153652;color:#6ed0ff;padding:11px 14px;font-weight:800}
+.info{margin-top:14px;border:1px solid #202d45;background:#111a2b;border-radius:14px;padding:13px;color:#8392aa;display:flex;justify-content:center;gap:18px;font-size:14px}
+button.primary{width:100%;border:0;border-radius:13px;padding:15px;background:#2879ff;color:#fff;font-weight:900;font-size:15px;margin-top:18px}.login{display:block;text-align:center;margin-top:16px;color:#6eaaff;text-decoration:none}.note{color:#65748c;font-size:12px;line-height:1.5;margin-top:16px;text-align:center}
+#result{display:none}.error{margin-top:15px;padding:12px;border-radius:11px;background:#3c1d25;color:#ff9fac;text-align:center}
+</style>
+</head>
+<body>
+<main class="box">
+<div class="icon">🔑</div>
+<h1>Generate Access Key</h1>
+<p class="sub">Buat access key Free untuk membuka inbox yang kamu miliki.</p>
+<div class="line"></div>
+<div id="before" class="center">
+  <button class="primary" id="generate">Generate Access Key</button>
+  <p class="note">Durasi key Free mengikuti pengaturan yang ditetapkan admin.</p>
+</div>
+<div id="result">
+  <div class="center"><span class="success">✓ Key Berhasil Dibuat</span></div>
+  <div class="label">YOUR ACCESS KEY</div>
+  <div class="key"><span id="key"></span><button class="copy" id="copy">Salin</button></div>
+  <div class="info"><span>◷ <b id="duration">-</b></span><span>•</span><span>Berakhir <b id="expires">-</b></span></div>
+  <button class="primary" onclick="location.href='/login.html'">Masuk dengan Key</button>
+  <button class="primary" style="background:#17243a;color:#aebbd0" onclick="location.reload()">Generate Key Baru</button>
+</div>
+<div class="error" id="error" style="display:none"></div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+function unitText(u,n){return `${n} ${({minute:"menit",hour:"jam",day:"hari",week:"minggu",month:"bulan",year:"tahun"})[u]||u}`}
+$("generate").onclick=async()=>{
+ $("generate").disabled=true;$("generate").textContent="Membuat...";
+ $("error").style.display="none";
+ try{
+  let r=await fetch("/api/free-key",{method:"POST",headers:{"Accept":"application/json"}});
+  let raw=await r.text();
+  let d;
+  try { d=JSON.parse(raw); } catch (_) {
+    // Fallback untuk deployment lama yang mungkin belum mengenali /api/free-key
+    if(r.status===404){
+      r=await fetch("/api/freekey",{method:"POST",headers:{"Accept":"application/json"}});
+      raw=await r.text();
+      try { d=JSON.parse(raw); } catch (__) { throw Error(`API tidak tersedia (HTTP ${r.status}). Pastikan file api/free-key.js ikut ter-deploy.`); }
+    } else {
+      throw Error(`API mengembalikan respons tidak valid (HTTP ${r.status}).`);
+    }
+  }
+  if(!r.ok || !d.success) throw Error(d.message || "Gagal membuat key");
+  $("key").textContent=d.key;
+  $("duration").textContent=unitText(d.unit,d.duration);
+  $("expires").textContent=new Date(d.expires_at).toLocaleString("id-ID",{dateStyle:"short",timeStyle:"short"});
+  $("before").style.display="none";$("result").style.display="block";
+ }catch(e){$("error").textContent=e.message;$("error").style.display="block";$("generate").disabled=false;$("generate").textContent="Generate Access Key"}
+};
+$("copy").onclick=async()=>{await navigator.clipboard.writeText($("key").textContent);$("copy").textContent="Tersalin";setTimeout(()=>$("copy").textContent="Salin",1500)}
+</script>
+</body></html>

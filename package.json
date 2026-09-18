@@ -1,0 +1,11 @@
+{
+  "name": "yamzz-mail-inbox",
+  "version": "4.0.0",
+  "private": true,
+  "description": "Yamzz Mail Inbox - Vercel + IMAP + PostgreSQL",
+  "dependencies": {
+    "@vercel/postgres": "^0.10.0",
+    "imapflow": "^1.0.191",
+    "mailparser": "^3.7.4"
+  }
+}
