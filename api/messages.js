@@ -1,6 +1,6 @@
 const { ImapFlow } = require("imapflow");
 const { simpleParser } = require("mailparser");
-const { requireUser, json } = require("./_db");
+const { requireUser, json } = require("./_db.js");
 
 function safeDate(value) {
   const d = new Date(value);
