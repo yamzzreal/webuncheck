@@ -1,4 +1,4 @@
-const { initDb, sql, makeKey, durationMs, json } = require("./_db");
+const { initDb, sql, makeKey, durationMs, json } = require("./_db.js");
 
 module.exports = async (req,res) => {
   if (req.method !== "POST") return json(res,405,{success:false,message:"Method not allowed"});
