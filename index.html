@@ -1,24 +1,1601 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Yamzz Mail</title>
-<style>
-:root{--bg:#070b13;--panel:#0c1322;--line:#1c2d4a;--text:#edf4ff;--muted:#74839c;--blue:#2879ff;--cyan:#45c8ff;--green:#29d09a;--orange:#ffb10e}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Arial;padding-bottom:30px}.top{height:72px;background:#10131c;border-bottom:1px solid #20283a;display:flex;align-items:center;padding:0 16px;gap:12px;position:sticky;top:0;z-index:5}.logo{width:42px;height:42px;border-radius:9px;background:#fff;color:#111;display:grid;place-items:center;font-weight:900;font-size:12px}.brand{font-weight:900;font-size:18px;flex:1}.pill{background:#17172b;color:#ad96ff;border:1px solid #3b315f;padding:8px 13px;border-radius:11px;max-width:135px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:800}.menu{border:0;background:none;color:#d9e2ef;font-size:28px}.wrap{max-width:900px;margin:auto;padding:14px 15px}.tools{display:flex;gap:9px}.search{flex:1;min-width:0;background:#0a1020;border:1px solid #1e3152;color:#fff;border-radius:18px;padding:15px 18px;font-size:15px;outline:none}.live{border:1px solid #253754;background:#131b2d;color:#a8b4c9;border-radius:15px;padding:0 15px;font-weight:800}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#21c891;margin-right:5px}.count{color:#7b8aa2;font-size:14px;margin:14px 5px}.card{background:#0b1221;border:1px solid #1b2b48;border-radius:27px;padding:17px 15px;margin:12px 0;display:flex;gap:14px;cursor:pointer;transition:.15s}.card:hover{border-color:#31558d}.avatar{width:62px;height:62px;flex:0 0 62px;border-radius:15px;background:linear-gradient(135deg,#2e7bff,#1851cc);display:grid;place-items:center}.avatar svg{width:32px;height:32px;fill:white}.body{min-width:0;flex:1}.row{display:flex;gap:8px;align-items:center}.sender{color:var(--orange);font-weight:900;font-size:16px}.star{margin-left:auto;color:#71809a;font-size:24px}.subject{font-weight:700;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tags{display:flex;gap:7px;margin-top:9px}.tag{background:#142750;color:#74adff;padding:6px 10px;border-radius:7px;font-size:12px;font-weight:700}.tag.time{background:#0c3440;color:#42d5a7;max-width:48%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tag.date{background:#151d31;color:#77849b}.empty,.error{padding:35px;text-align:center;color:var(--muted);border:1px dashed #263653;border-radius:20px;margin-top:20px}.error{color:#ff9da9}.refresh{margin-top:15px;width:100%;padding:13px;border:0;border-radius:12px;background:var(--blue);color:#fff;font-weight:800}
-.overlay{display:none;position:fixed;inset:0;background:#000b;z-index:20;padding:15px;align-items:flex-end}.modal{width:min(900px,100%);max-height:88vh;overflow:auto;margin:auto;background:#0d1424;border:1px solid #243a5f;border-radius:25px;padding:0}.handle{width:50px;height:5px;border-radius:5px;background:#35405a;margin:14px auto}.modalHead{padding:0 20px 18px;border-bottom:1px solid #1e2940}.modalHead h2{margin:0 0 8px;font-size:20px}.meta{color:#8391a9;font-size:13px;line-height:1.6}.detail{padding:18px 20px}.label{color:#687892;font-size:12px;font-weight:900;letter-spacing:1.5px;margin:4px 0 9px}.from{color:#ffb10e;font-weight:900;word-break:break-all}.content{background:#09101e;border:1px solid #1d2b44;border-radius:14px;padding:15px;white-space:pre-wrap;line-height:1.6;overflow-wrap:anywhere;min-height:90px}.close{width:100%;border:0;background:#26334b;color:#e8f0fc;padding:14px;border-radius:12px;font-weight:900;margin-top:15px}
-@media(max-width:520px){.brand{font-size:16px}.pill{max-width:105px}.card{border-radius:22px}.avatar{width:56px;height:56px;flex-basis:56px}.tag.time{max-width:42%}}
-</style></head>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#07111f"
+    >
+
+    <title>
+        Yamzz Mail
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                #050c16;
+
+            color: #fff;
+
+            font-family:
+                Arial,
+                sans-serif;
+        }
+
+
+        /* =========================
+           TOP BAR
+        ========================= */
+
+        .topbar {
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            padding: 14px 16px;
+
+            background:
+                rgba(5, 15, 26, .94);
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.06);
+
+            backdrop-filter:
+                blur(12px);
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .brand-icon {
+
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background:
+                #087cff;
+
+            font-weight: 900;
+        }
+
+
+        .brand-name {
+
+            font-size: 15px;
+
+            font-weight: 800;
+        }
+
+
+        .brand-sub {
+
+            margin-top: 2px;
+
+            font-size: 10px;
+
+            color:
+                rgba(255,255,255,.45);
+        }
+
+
+        .account {
+
+            padding:
+                6px 10px;
+
+            border-radius: 999px;
+
+            background:
+                rgba(0,136,255,.12);
+
+            border:
+                1px solid
+                rgba(0,136,255,.25);
+
+            color:
+                #56b4ff;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+
+            width: 100%;
+
+            max-width: 700px;
+
+            margin:
+                0 auto;
+
+            padding:
+                18px 14px 100px;
+        }
+
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        .search-box {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 12px;
+        }
+
+
+        #search {
+
+            width: 100%;
+
+            height: 44px;
+
+            padding:
+                0 14px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            border-radius: 12px;
+
+            outline: none;
+
+            background:
+                rgba(255,255,255,.04);
+
+            color: #fff;
+
+            font-size: 13px;
+        }
+
+
+        #search::placeholder {
+
+            color:
+                rgba(255,255,255,.35);
+        }
+
+
+        #search:focus {
+
+            border-color:
+                rgba(0,145,255,.45);
+        }
+
+
+        /* =========================
+           ACTION BAR
+        ========================= */
+
+        .actions {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 14px;
+        }
+
+
+        button {
+
+            border: 0;
+
+            cursor: pointer;
+
+            color: #fff;
+        }
+
+
+        .live-btn,
+        .refresh-btn {
+
+            height: 38px;
+
+            padding:
+                0 13px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,.05);
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        .live-btn {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+        }
+
+
+        .dot {
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background:
+                #27e66f;
+
+            box-shadow:
+                0 0 8px
+                #27e66f;
+        }
+
+
+        #count {
+
+            margin-bottom: 12px;
+
+            color:
+                rgba(255,255,255,.45);
+
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           EMAIL LIST
+        ========================= */
+
+        #list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 9px;
+        }
+
+
+        .email-item {
+
+            padding: 14px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,255,255,.035);
+
+            border:
+                1px solid
+                rgba(255,255,255,.055);
+
+            cursor: pointer;
+
+            transition:
+                .18s ease;
+        }
+
+
+        .email-item:hover {
+
+            background:
+                rgba(0,136,255,.07);
+
+            border-color:
+                rgba(0,136,255,.2);
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        .email-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+
+        .email-from {
+
+            min-width: 0;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+            white-space: nowrap;
+        }
+
+
+        .email-date {
+
+            flex-shrink: 0;
+
+            font-size: 10px;
+
+            color:
+                rgba(255,255,255,.35);
+        }
+
+
+        .email-subject {
+
+            margin-top: 7px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        .email-snippet {
+
+            margin-top: 5px;
+
+            color:
+                rgba(255,255,255,.45);
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+            display: -webkit-box;
+
+            -webkit-line-clamp: 2;
+
+            -webkit-box-orient: vertical;
+
+            overflow: hidden;
+        }
+
+
+        .empty,
+        .error {
+
+            padding: 30px 15px;
+
+            text-align: center;
+
+            color:
+                rgba(255,255,255,.4);
+
+            font-size: 12px;
+        }
+
+
+        .error {
+
+            color:
+                #ff7373;
+        }
+
+
+        /* =========================
+           POPUP
+        ========================= */
+
+        .overlay {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9999;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 14px;
+
+            background:
+                rgba(0,0,0,.75);
+
+            backdrop-filter:
+                blur(8px);
+        }
+
+
+        .login-card {
+
+            width: 100%;
+
+            max-width: 430px;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            padding: 20px;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #0b1b30,
+                    #07111f
+                );
+
+            border:
+                1px solid
+                rgba(0,174,255,.3);
+
+            box-shadow:
+                0 0 35px
+                rgba(0,150,255,.18);
+
+            animation:
+                popupIn .2s ease;
+        }
+
+
+        @keyframes popupIn {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(15px)
+                    scale(.97);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        /* =========================
+           POPUP HEADER
+        ========================= */
+
+        .login-card-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+
+            padding-bottom: 15px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.07);
+        }
+
+
+        .login-card-title {
+
+            font-size: 16px;
+
+            font-weight: 800;
+
+            letter-spacing: .7px;
+        }
+
+
+        .login-card-subtitle {
+
+            margin-top: 4px;
+
+            font-size: 10px;
+
+            color:
+                rgba(255,255,255,.4);
+        }
+
+
+        .close-btn {
+
+            width: 36px;
+
+            height: 36px;
+
+            flex-shrink: 0;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,.07);
+
+            font-size: 24px;
+
+            line-height: 1;
+        }
+
+
+        .close-btn:hover {
+
+            background:
+                rgba(255,255,255,.13);
+        }
+
+
+        /* =========================
+           LOGIN INFO
+        ========================= */
+
+        .login-info {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 9px;
+        }
+
+
+        .info-item {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            min-height: 48px;
+
+            padding:
+                10px 13px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,255,255,.035);
+
+            border:
+                1px solid
+                rgba(255,255,255,.055);
+        }
+
+
+        .info-item span {
+
+            flex-shrink: 0;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            color:
+                rgba(255,255,255,.48);
+        }
+
+
+        .info-item strong {
+
+            max-width: 68%;
+
+            overflow: hidden;
+
+            text-align: right;
+
+            text-overflow: ellipsis;
+
+            white-space: nowrap;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: #fff;
+        }
+
+
+        @media (max-width: 480px) {
+
+            main {
+
+                padding-left: 10px;
+
+                padding-right: 10px;
+            }
+
+
+            .login-card {
+
+                padding: 16px;
+
+                border-radius: 16px;
+            }
+
+
+            .info-item strong {
+
+                max-width: 60%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
 <body>
-<header class="top"><div class="logo">YM</div><div class="brand">Yamzz Mail</div><div class="pill" id="account">INBOX</div><button class="menu" onclick="location.href='/login.html'">☰</button></header>
-<main class="wrap"><div class="tools"><input class="search" id="search" placeholder="Cari email, pengirim, subject..."><button class="live" id="live"><span class="dot"></span>Live</button></div><div class="count" id="count">Memuat data...</div><div id="list"></div><button class="refresh" id="refresh">Refresh Inbox</button></main>
-<div class="overlay" id="overlay"><article class="modal"><div class="handle"></div><div class="modalHead"><h2 id="mSubject">Pesan</h2><div class="meta" id="mMeta"></div></div><div class="detail"><div class="label">PENGIRIM</div><div class="from" id="mFrom"></div><div class="label" style="margin-top:18px">ISI PESAN</div><div class="content" id="mContent"></div><button class="close" id="close">TUTUP</button></div></article></div>
-<script>
-const $=id=>document.getElementById(id);let all=[];let live=true;let timer;
-function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
-function fmt(d){if(!d)return "-";return new Date(d).toLocaleString("id-ID",{dateStyle:"medium",timeStyle:"short"})}
-function icon(){return '<svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z"/></svg>'}
-function render(){const q=$("search").value.toLowerCase();const data=all.filter(m=>(m.from.email+" "+m.from.name+" "+m.subject+" "+m.snippet).toLowerCase().includes(q));$("count").textContent=data.length+" email";$("list").innerHTML=data.length?data.map((m,i)=>`<div class="card" data-i="${all.indexOf(m)}"><div class="avatar">${icon()}</div><div class="body"><div class="row"><div class="sender">${esc(m.from.name||m.from.email||"Pengirim")}</div><div class="star">☆</div></div><div class="subject">✉ ${esc(m.subject)} <span style="color:#b4bfd1">(${esc(m.from.email)})</span></div><div class="tags"><span class="tag">${m.seen?"Email":"Baru"}</span><span class="tag time">${esc(m.snippet||"Tidak ada preview")}</span><span class="tag date">${esc(fmt(m.date))}</span></div></div></div>`).join(""):'<div class="empty">Tidak ada email yang cocok.</div>';document.querySelectorAll(".card").forEach(x=>x.onclick=()=>openMsg(all[Number(x.dataset.i)]))}
-async function load(){$("live").style.opacity=".6";try{const r=await fetch("/api/messages?limit=50",{cache:"no-store",credentials:"same-origin"});const raw=await r.text();let d;try{d=JSON.parse(raw)}catch(_){const preview=raw.replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim().slice(0,220);throw new Error("API mengembalikan respons bukan JSON (HTTP "+r.status+"). "+(preview||"Periksa deployment /api/messages di Vercel."))}if(!r.ok||!d.success)throw new Error((d.message||("HTTP "+r.status))+(d.error?" — "+d.error:""));all=d.messages||[];$("account").textContent=(d.plan||"INBOX").toUpperCase();render()}catch(e){$("count").textContent="Gagal memuat";$("list").innerHTML='<div class="error">'+esc(e.message)+'</div>'}$("live").style.opacity="1"}
-function openMsg(m){$("mSubject").textContent=m.subject||"Pesan";$("mFrom").textContent=(m.from.name?m.from.name+" ":"")+"<"+(m.from.email||"-")+">";$("mMeta").textContent="Diterima: "+fmt(m.date);$("mContent").textContent=m.text||"Email tidak memiliki teks yang dapat ditampilkan.";$("overlay").style.display="flex"}
-$("close").onclick=()=>$("overlay").style.display="none";$("overlay").onclick=e=>{if(e.target===$("overlay"))$("overlay").style.display="none"};$("search").oninput=render;$("refresh").onclick=load;$("live").onclick=()=>{live=!live;$("live").innerHTML=live?'<span class="dot"></span>Live':'○ Paused';if(live){clearInterval(timer);timer=setInterval(load,15000)}else clearInterval(timer)};load();timer=setInterval(load,15000);
-</script></body></html>
+
+
+    <!-- =========================
+         TOP BAR
+    ========================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                YM
+            </div>
+
+            <div>
+
+                <div class="brand-name">
+                    Yamzz Mail
+                </div>
+
+                <div class="brand-sub">
+                    Spam Inbox
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="account"
+            class="account"
+        >
+            SPAM
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main>
+
+
+        <div class="search-box">
+
+            <input
+                id="search"
+                type="search"
+                placeholder="Cari email..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+
+        <div class="actions">
+
+            <button
+                id="live"
+                class="live-btn"
+                type="button"
+            >
+                <span class="dot"></span>
+                Live
+            </button>
+
+
+            <button
+                id="refresh"
+                class="refresh-btn"
+                type="button"
+            >
+                Refresh Inbox
+            </button>
+
+        </div>
+
+
+
+        <div id="count">
+            Memuat...
+        </div>
+
+
+
+        <div id="list">
+
+            <div class="empty">
+                Memuat email...
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================
+         LOGIN DETAIL POPUP
+    ========================= -->
+
+    <div
+        id="overlay"
+        class="overlay"
+    >
+
+        <div class="login-card">
+
+
+            <div class="login-card-header">
+
+                <div>
+
+                    <div class="login-card-title">
+                        DETAIL LOGIN
+                    </div>
+
+                    <div class="login-card-subtitle">
+                        Informasi sesi
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="close"
+                    class="close-btn"
+                    type="button"
+                    aria-label="Tutup"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <div class="login-info">
+
+
+                <div class="info-item">
+
+                    <span>
+                        Email
+                    </span>
+
+                    <strong id="infoEmail">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div class="info-item">
+
+                    <span>
+                        Sandi
+                    </span>
+
+                    <strong id="infoPassword">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div class="info-item">
+
+                    <span>
+                        Login Via
+                    </span>
+
+                    <strong id="infoLoginVia">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div class="info-item">
+
+                    <span>
+                        IP
+                    </span>
+
+                    <strong id="infoIP">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div class="info-item">
+
+                    <span>
+                        Negara
+                    </span>
+
+                    <strong id="infoCountry">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div class="info-item">
+
+                    <span>
+                        Provinsi
+                    </span>
+
+                    <strong id="infoProvince">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div class="info-item">
+
+                    <span>
+                        Kota
+                    </span>
+
+                    <strong id="infoCity">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div class="info-item">
+
+                    <span>
+                        ASN
+                    </span>
+
+                    <strong id="infoASN">
+                        -
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        /* =========================
+           GLOBAL
+        ========================= */
+
+        let all = [];
+
+        let live = true;
+
+        let timer = null;
+
+
+
+        /* =========================
+           SHORT SELECTOR
+        ========================= */
+
+        function $(id) {
+
+            return document.getElementById(id);
+        }
+
+
+
+        /* =========================
+           ESCAPE HTML
+        ========================= */
+
+        function esc(value) {
+
+            return String(
+                value ?? ""
+            )
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+        }
+
+
+
+        /* =========================
+           FORMAT DATE
+        ========================= */
+
+        function fmt(value) {
+
+            if (!value) {
+
+                return "-";
+            }
+
+
+            const date =
+                new Date(value);
+
+
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+
+                return "-";
+            }
+
+
+            return date.toLocaleString(
+                "id-ID",
+                {
+                    dateStyle: "short",
+                    timeStyle: "short"
+                }
+            );
+        }
+
+
+
+        /* =========================
+           GET DATA
+        ========================= */
+
+        function pick(...values) {
+
+            for (
+                const value
+                of values
+            ) {
+
+                if (
+                    value !== undefined &&
+                    value !== null &&
+                    String(value).trim() !== ""
+                ) {
+
+                    return String(value);
+                }
+            }
+
+
+            return "-";
+        }
+
+
+
+        /* =========================
+           RENDER EMAIL
+        ========================= */
+
+        function render() {
+
+            const query =
+                $("search")
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+
+            const filtered =
+                all.filter(message => {
+
+                    const text = [
+
+                        message.subject,
+
+                        message.snippet,
+
+                        message.text,
+
+                        message.from?.name,
+
+                        message.from?.email,
+
+                        message.email,
+
+                        message.ip,
+
+                        message.city,
+
+                        message.country
+
+                    ]
+                        .filter(Boolean)
+                        .join(" ")
+                        .toLowerCase();
+
+
+                    return text.includes(
+                        query
+                    );
+                });
+
+
+            if (!filtered.length) {
+
+                $("list").innerHTML = `
+                    <div class="empty">
+                        Tidak ada email yang cocok.
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            $("list").innerHTML =
+                filtered.map(
+                    (message, index) => `
+
+                    <div
+                        class="email-item"
+                        onclick="openMsg(all[${all.indexOf(message)}])"
+                    >
+
+                        <div class="email-top">
+
+                            <div class="email-from">
+                                ${esc(
+                                    message.from?.name ||
+                                    message.from?.email ||
+                                    message.email ||
+                                    "-"
+                                )}
+                            </div>
+
+                            <div class="email-date">
+                                ${esc(
+                                    fmt(message.date)
+                                )}
+                            </div>
+
+                        </div>
+
+
+                        <div class="email-subject">
+
+                            ${esc(
+                                message.subject ||
+                                "Pesan"
+                            )}
+
+                        </div>
+
+
+                        <div class="email-snippet">
+
+                            ${esc(
+                                message.snippet ||
+                                message.text ||
+                                "-"
+                            )}
+
+                        </div>
+
+                    </div>
+
+                `
+                ).join("");
+        }
+
+
+
+        /* =========================
+           LOAD INBOX
+        ========================= */
+
+        async function load() {
+
+            try {
+
+                $("live").style.opacity =
+                    ".5";
+
+
+                const response =
+                    await fetch(
+                        "/api/messages?limit=50",
+                        {
+                            method: "GET",
+                            cache: "no-store"
+                        }
+                    );
+
+
+                let data = null;
+
+
+                try {
+
+                    data =
+                        await response.json();
+
+                } catch (_) {
+
+                    data = null;
+                }
+
+
+                if (
+                    !response.ok ||
+                    !data?.success
+                ) {
+
+                    throw new Error(
+                        data?.message ||
+                        (
+                            "HTTP " +
+                            response.status
+                        ) +
+                        (
+                            data?.error
+                                ? " — " +
+                                  data.error
+                                : ""
+                        )
+                    );
+                }
+
+
+                all =
+                    Array.isArray(
+                        data.messages
+                    )
+                        ? data.messages
+                        : [];
+
+
+                $("account").textContent =
+                    (
+                        data.mailbox ||
+                        data.folder ||
+                        data.plan ||
+                        "SPAM"
+                    ).toUpperCase();
+
+
+                if (
+                    typeof data.unseen ===
+                    "number"
+                ) {
+
+                    $("count").textContent =
+                        `${all.length} email • ${data.unseen} belum dibaca`;
+
+                } else {
+
+                    $("count").textContent =
+                        `${all.length} email`;
+                }
+
+
+                render();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Load inbox error:",
+                    error
+                );
+
+
+                $("count").textContent =
+                    "Gagal memuat";
+
+
+                $("list").innerHTML = `
+
+                    <div class="error">
+
+                        ${esc(
+                            error.message ||
+                            "Gagal membaca inbox"
+                        )}
+
+                    </div>
+
+                `;
+
+
+            } finally {
+
+                $("live").style.opacity =
+                    "1";
+            }
+        }
+
+
+
+        /* =========================
+           OPEN EMAIL
+        ========================= */
+
+        function openMsg(message) {
+
+            if (!message) {
+
+                return;
+            }
+
+
+            /* =========================
+               DATA LOGIN
+            ========================= */
+
+            const email =
+                pick(
+                    message.email,
+                    message.login?.email,
+                    message.user?.email,
+                    message.username,
+                    message.from?.email
+                );
+
+
+            const loginVia =
+                pick(
+                    message.loginVia,
+                    message.login_via,
+                    message.login?.via,
+                    message.provider,
+                    message.login?.provider
+                );
+
+
+            const ip =
+                pick(
+                    message.ip,
+                    message.IP,
+                    message.login?.ip
+                );
+
+
+            const country =
+                pick(
+                    message.country,
+                    message.negara,
+                    message.login?.country
+                );
+
+
+            const province =
+                pick(
+                    message.province,
+                    message.provinsi,
+                    message.login?.province
+                );
+
+
+            const city =
+                pick(
+                    message.city,
+                    message.kota,
+                    message.login?.city
+                );
+
+
+            const asn =
+                pick(
+                    message.asn,
+                    message.ASN,
+                    message.login?.asn
+                );
+
+
+            /*
+             * Sandi tidak ditampilkan.
+             * Password pengguna sebaiknya tidak
+             * disimpan atau ditampilkan plaintext.
+             */
+
+            const password = "-";
+
+
+            /* =========================
+               MASUKKAN DATA KE POPUP
+            ========================= */
+
+            $("infoEmail").textContent =
+                email;
+
+
+            $("infoPassword").textContent =
+                password;
+
+
+            $("infoLoginVia").textContent =
+                loginVia;
+
+
+            $("infoIP").textContent =
+                ip;
+
+
+            $("infoCountry").textContent =
+                country;
+
+
+            $("infoProvince").textContent =
+                province;
+
+
+            $("infoCity").textContent =
+                city;
+
+
+            $("infoASN").textContent =
+                asn;
+
+
+            /* =========================
+               TAMPILKAN POPUP
+            ========================= */
+
+            $("overlay").style.display =
+                "flex";
+        }
+
+
+
+        /* =========================
+           CLOSE POPUP
+        ========================= */
+
+        $("close").onclick = () => {
+
+            $("overlay").style.display =
+                "none";
+        };
+
+
+        $("overlay").onclick =
+            event => {
+
+                if (
+                    event.target ===
+                    $("overlay")
+                ) {
+
+                    $("overlay").style.display =
+                        "none";
+                }
+            };
+
+
+
+        /* =========================
+           ESC CLOSE
+        ========================= */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    $("overlay").style.display =
+                        "none";
+                }
+            }
+        );
+
+
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        $("search").oninput = () => {
+
+            render();
+        };
+
+
+
+        /* =========================
+           REFRESH BUTTON
+        ========================= */
+
+        $("refresh").onclick = () => {
+
+            load();
+        };
+
+
+
+        /* =========================
+           LIVE MODE
+        ========================= */
+
+        $("live").onclick = () => {
+
+            live = !live;
+
+
+            if (live) {
+
+                $("live").innerHTML =
+                    '<span class="dot"></span>Live';
+
+
+                clearInterval(timer);
+
+
+                timer =
+                    setInterval(
+                        load,
+                        15000
+                    );
+
+
+            } else {
+
+                $("live").textContent =
+                    "○ Paused";
+
+
+                clearInterval(timer);
+
+                timer = null;
+            }
+        };
+
+
+
+        /* =========================
+           LOAD PERTAMA KALI
+        ========================= */
+
+        load();
+
+
+
+        /* =========================
+           AUTO SYNC
+           SETIAP 15 DETIK
+        ========================= */
+
+        timer =
+            setInterval(
+                load,
+                15000
+            );
+
+    </script>
+
+</body>
+
+</html>
